@@ -28,3 +28,5 @@ const interaction = {
 		res.send("Interaction recieved")
 	},
 }
+
+module.exports = interaction
