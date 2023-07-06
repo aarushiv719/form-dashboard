@@ -1,4 +1,4 @@
-import { React, useState, useRef } from "react";
+import { React, useState } from "react";
 
 import Logo from "./media/sayyes.jpg";
 
@@ -7,15 +7,38 @@ function App() {
 	const [email, setEmail] = useState("");
 
 	const submit = () => {
-		alert("Name: " + name + "\nEmail: " + email);
+		fetch("https://say-yes-buffalo-backend.onrender.com/interaction", {
+			method: "POST",
+			email: email,
+			name: name,
+			jobId: "1",
+		})
+			.then((response) => {
+				if (response.ok) {
+					return response.json();
+				} else {
+					console.log(
+						"HTTP error:" +
+							response.status +
+							":" +
+							response.statusText
+					);
+					return null;
+				}
+			})
+			.then((data) => {
+				alert("Succeeded!\nName: " + name + "\nEmail: " + email);
+			});
 	};
 
+	const getEmail = ({ id }) => {};
+
 	return (
-		<div className="absolute inset-16 rounded-3xl p-8 bg-gray-300 drop-shadow-lg">
+		<div className="absolute inset-16 rounded-3xl p-8 bg-gray-300 drop-shadow-lg ">
 			<img
 				src={Logo}
 				alt="Say Yes Buffalo"
-				className="w-1/2 md:w-1/4 mx-auto rounded-3xl"
+				className="max-w-1/2 md:max-w-1/4 mx-auto rounded-3xl"
 			></img>
 			<p className="text-center text-gray-700 mt-1 text-lg">
 				Let's Stay Connected - Please Share Your Details
