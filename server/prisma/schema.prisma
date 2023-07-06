@@ -41,8 +41,8 @@ model Application {
   job Job @relation(fields: [jobId], references: [id])
   jobId Int
 
-  didApply Boolean
-  didInterview Boolean
-  didOffer Boolean
-  didReject Boolean
+  didApply Boolean?
+  didInterview Boolean?
+  didOffer Boolean?
+  didReject Boolean?
 }
