@@ -1,4 +1,4 @@
-const application = {
+const interaction = {
 	create: async (req, res) => {
 		const { email, name, jobId } = req.body
 
@@ -18,13 +18,13 @@ const application = {
 			})
 		}
 
-		const newApplication = await prisma.application.create({
+		const newInteraction = await prisma.interaction.create({
 			data: {
 				jobId: jobId,
 				userId: newUser.id,
 			},
 		})
 
-		res.send("Application recieved")
+		res.send("Interaction recieved")
 	},
 }
