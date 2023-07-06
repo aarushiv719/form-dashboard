@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+hr {
+	height: 2px;
+	background: grey;
+	margin-top: 1.25rem; /* 20px */
+	margin-bottom: 1.25rem; /* 20px */
+}
