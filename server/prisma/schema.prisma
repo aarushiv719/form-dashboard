@@ -30,6 +30,8 @@ model Job {
   description String
   company Company @relation(fields: [companyId], references: [id])
   companyId Int
+  tinyurl String
+  joburl String
   applications Application[]
 }
 
