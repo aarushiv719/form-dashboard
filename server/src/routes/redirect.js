@@ -1,13 +1,10 @@
 const express = require("express")
+const redirect = require("../controllers/redirect_controller")
 
 const router = express.Router()
 
-router.post("/", (req, res) => {
-	res.send("creating redirect")
-})
+router.post("/", redirect.create)
 
-router.get("/", (req, res) => {
-	res.send("sending redirect")
-})
+router.get("/", redirect.get)
 
 module.exports = router
