@@ -1,31 +1,48 @@
 const interaction = {
-	create: async (req, res) => {
+	create: (req, res) => {
 		const { email, name, jobId } = req.body
-
 		const prisma = require("../models/prisma")
-		const user = await prisma.user.findUnique({
-			where: {
-				email: email,
-			},
-		})
 
-		if (!user) {
-			const newUser = await prisma.user.create({
-				data: {
+		prisma.applicant
+			.findUnique({
+				where: {
 					email: email,
-					name: name,
 				},
 			})
-		}
-
-		const newInteraction = await prisma.interaction.create({
-			data: {
-				jobId: jobId,
-				userId: newUser.id,
-			},
-		})
-
-		res.send("Interaction recieved")
+			.then((applicant) => {
+				if (!applicant) {
+					prisma.applicant
+						.create({
+							data: {
+								email: email,
+								name: name,
+							},
+						})
+						.then((applicant) => {
+							prisma.interaction
+								.create({
+									data: {
+										applicantId: parseInt(applicant.id),
+										jobId: parseInt(jobId),
+									},
+								})
+								.then((interaction) => {
+									res.send("interaction made")
+								})
+						})
+				} else {
+					prisma.interaction
+						.create({
+							data: {
+								applicantId: parseInt(applicant.id),
+								jobId: parseInt(jobId),
+							},
+						})
+						.then((interaction) => {
+							res.send("interaction made")
+						})
+				}
+			})
 	},
 }
 
