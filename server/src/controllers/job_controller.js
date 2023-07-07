@@ -28,10 +28,9 @@ const job = {
 			});
 	},
 	create: (req, res) => {
-		const { title, description, companyId, jobUrl } = req.body;
+		const { companyId } = req.params;
+		const { title, description, jobUrl } = req.body;
 		const prisma = require("../models/prisma");
-
-		prisma.job.get;
 
 		prisma.job
 			.create({
