@@ -14,11 +14,14 @@ function App() {
 	const [jobDescription, setJobDescription] = useState("")
 
 	useEffect(() => {
-		if (window.location.pathname === "/") {
+		const queryParameters = new URLSearchParams(window.location.search)
+		const jobid = queryParameters.get("jobid")
+		if (!jobid) {
 			setIsDefault(false)
 		} else {
 			setIsDefault(true)
-			const jobid = window.location.pathname.substring(1)
+			//Get job id from param
+
 			console.log(jobid)
 			fetch(
 				`https://say-yes-buffalo-backend.onrender.com/job/${jobid}}`,
