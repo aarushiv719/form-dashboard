@@ -10,8 +10,21 @@ const job = {
 				},
 			})
 			.then((job) => {
-				if (!job) res.send("Job doesn't exist")
-				else if (job) res.send(JSON.stringify(job))
+				if (!job) {
+					res.send("Job doesn't exist")
+				} else {
+					prisma.company
+						.findUnique({
+							where: {
+								id: parseInt(job.companyId),
+							},
+						})
+						.then((company) => {
+							job.company = company
+							res.send(JSON.stringify(job))
+						})
+				}
+				job
 			})
 	},
 	create: (req, res) => {
