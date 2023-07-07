@@ -8,11 +8,11 @@ function App() {
 	const [showModal, setShowModal] = useState(false);
 	const [interactions, setInteractions] = useState("");
 
-	const MenuItem = ({ text }) => {
+	const MenuItem = ({ text, showModal }) => {
 		return (
 			<li
 				className="py-3 px-6 rounded-lg ease-in-out duration-200 hover:bg-green-600 hover:cursor-pointer"
-				onClick={() => setShowModal(true)}
+				onClick={() => showModal && showModal(true)}
 			>
 				{text}
 			</li>
@@ -56,7 +56,7 @@ function App() {
 				</div>
 				<ul className="mt-2 space-y-5">
 					<MenuItem text="Dashboard" />
-					<MenuItem text="Jobs" />
+					<MenuItem text="Jobs" showModal={setShowModal} />
 					<MenuItem text="Applications" />
 				</ul>
 			</div>
