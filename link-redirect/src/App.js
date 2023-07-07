@@ -1,12 +1,16 @@
-import { React, useState } from "react";
+import { React, useState, useRef } from "react";
 
+import emailjs from "@emailjs/browser";
 import Logo from "./media/sayyes.jpg";
 
 function App() {
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
 
+	const formRef = useRef(null);
+
 	const submit = () => {
+		sendEmail();
 		fetch("https://say-yes-buffalo-backend.onrender.com/interaction", {
 			method: "POST",
 			email: email,
@@ -33,6 +37,40 @@ function App() {
 
 	const getEmail = ({ id }) => {};
 
+	const sendEmail = () => {
+		const emailData = {
+			to_name: "Alex",
+		};
+
+		const formData = Object.fromEntries(new FormData(formRef.current));
+		Object.assign(emailData, formData);
+		console.log(process.env.REACT_APP_SERVICE_ID);
+
+		let keys = {
+			service_id: "service_2oogo1g",
+			template_id: "template_0er0e33",
+			public_key: "JAQb_etGQpqPy_iDJ",
+		};
+
+		let params = {
+			to_name: name,
+			email: email,
+			position: "TEMP POSITION",
+			company: "TEMP COMPANY",
+		};
+
+		emailjs
+			.send(keys.service_id, keys.template_id, params, keys.public_key)
+			.then(
+				(result) => {
+					formRef.current.reset();
+				},
+				(error) => {
+					alert("An error occurred, Please try again", error.text);
+				}
+			);
+	};
+
 	return (
 		<div className="absolute inset-16 rounded-3xl p-8 bg-gray-300 drop-shadow-lg ">
 			<img
@@ -44,7 +82,7 @@ function App() {
 				Let's Stay Connected - Please Share Your Details
 			</p>
 			<hr />
-			<form>
+			<form ref={formRef}>
 				{/* Name */}
 				<div className="field w-full m-auto">
 					<input
