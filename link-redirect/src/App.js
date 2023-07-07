@@ -153,7 +153,7 @@ function App() {
 							<h2>
 								<label
 									htmlFor="name"
-									className="bg-blue-500 p-3 rounded-lg text-white text-xs"
+									className="bg-green-600 p-3 rounded-lg text-white text-xs"
 								>
 									Job Title: {jobTitle}
 								</label>
@@ -162,7 +162,7 @@ function App() {
 							<h3>
 								<label
 									htmlFor="company"
-									className="bg-blue-500 p-3 rounded-lg text-white text-xs"
+									className="bg-green-600 p-3 rounded-lg text-white text-xs"
 								>
 									Job Description: {jobDescription}
 								</label>
