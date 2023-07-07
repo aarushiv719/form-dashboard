@@ -44,6 +44,24 @@ const interaction = {
 				}
 			})
 	},
+	get: (req, res) => {
+		const { jobId } = req.body
+		const prisma = require("../models/prisma")
+
+		prisma.interaction
+			.findMany({
+				where: {
+					jobId: parseInt(jobId),
+				},
+				include: {
+					applicant: true,
+				},
+			})
+			.then((interactions) => {
+				if (!interactions) res.send(JSON.stringify([]))
+				res.send(JSON.stringify(interactions))
+			})
+	},
 }
 
 module.exports = interaction
