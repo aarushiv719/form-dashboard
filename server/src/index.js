@@ -1,7 +1,7 @@
 const express = require("express")
 const cors = require("cors")
 
-const redirectRouter = require("./routes/redirect")
+const jobRouter = require("./routes/job")
 const interactionRouter = require("./routes/interaction")
 
 const app = express()
@@ -9,7 +9,7 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
-app.use("/redirect", redirectRouter)
+app.use("/job", jobRouter)
 app.use("/interaction", interactionRouter)
 
 app.get("/", (req, res) => {

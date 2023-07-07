@@ -39,6 +39,7 @@ const interaction = {
 							},
 						})
 						.then((interaction) => {
+							console.log(interaction)
 							res.send("interaction made")
 						})
 				}
