@@ -1,11 +1,12 @@
-import React from "react";
+import { React, useEffect, useState } from "react";
 
 import Logo from "./media/sayyes.svg";
 import "./App.css";
 import JobModal from "./JobModal";
 
 function App() {
-	const [showModal, setShowModal] = React.useState(false);
+	const [showModal, setShowModal] = useState(false);
+	const [interactions, setInteractions] = useState("");
 
 	const MenuItem = ({ text }) => {
 		return (
@@ -17,6 +18,35 @@ function App() {
 			</li>
 		);
 	};
+
+	const getInteractions = ({ id }) => {
+		fetch("https://say-yes-buffalo-backend.onrender.com/redirect", {
+			method: "GET",
+			jobId: "1",
+		})
+			.then((response) => {
+				if (response.ok) {
+					console.log(response.json());
+					return response.json();
+				} else {
+					console.log(
+						"HTTP error:" +
+							response.status +
+							":" +
+							response.statusText
+					);
+					return null;
+				}
+			})
+			.then((data) => {
+				console.log(data);
+				setInteractions(data);
+			});
+	};
+
+	useEffect(() => {
+		getInteractions(1);
+	}, []);
 
 	return (
 		<div className="flex h-screen bg-gray-200">
@@ -32,16 +62,9 @@ function App() {
 			</div>
 			<div className="flex-grow p-6">
 				<h2 className="text-lg font-semibold">Job Postings</h2>
-				<p className="mt-4 text-gray-600">
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-					do eiusmod tempor incididunt ut labore et dolore magna
-					aliqua.
-				</p>
+				<p className="mt-4 text-gray-600">{interactions}</p>
 				{showModal ? (
-					<JobModal
-						isOpen={showModal}
-						setShowModal={() => setShowModal()}
-					/>
+					<JobModal setShowModal={() => setShowModal()} />
 				) : null}
 			</div>
 		</div>
