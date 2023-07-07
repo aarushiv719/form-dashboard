@@ -27,8 +27,8 @@ function App() {
 				</div>
 				<ul className="mt-2 space-y-5">
 					<MenuItem text="Dashboard" />
-					<MenuItem text="Jobs" showModal={setShowModal} />
-					<MenuItem text="Applications" />
+					<MenuItem text="New Job" showModal={setShowModal} />
+					<MenuItem text="Companies" />
 				</ul>
 			</div>
 			<div className="flex-grow p-6">
