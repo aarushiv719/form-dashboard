@@ -32,7 +32,7 @@ function App() {
 				</ul>
 			</div>
 			<div className="flex-grow p-6">
-				<h2 className="text-lg font-semibold">Job Postings</h2>
+				<h2 className="text-lg font-semibold">Dashboard</h2>
 				<TableauEmbded />
 				{showModal ? (
 					<JobModal setShowModal={() => setShowModal()} />

@@ -39,11 +39,12 @@ function App() {
 			company: "TEMP COMPANY",
 		};
 
+		console.log("sending email");
 		return emailjs
 			.send(keys.service_id, keys.template_id, params, keys.public_key)
 			.then(
 				(result) => {
-					console.log("Complete!");
+					console.log("email sent!");
 					formRef.current.reset();
 					return result;
 				},
@@ -56,40 +57,41 @@ function App() {
 	const postInteraction = () => {
 		console.log("posting");
 
-		return Promise.resolve(true);
-		// return fetch(
-		// 	"https://say-yes-buffalo-backend.onrender.com/interaction",
-		// 	{
-		// 		method: "POST",
-		// 		email: email,
-		// 		name: name,
-		// 		jobId: "1",
-		// 	}
-		// )
-		// 	.then((response) => {
-		// 		console.log(response);
-		// 		if (response.ok) {
-		// 			console.log("OK!");
-		// 			return response.json();
-		// 		} else {
-		// 			console.log(
-		// 				"HTTP error:" +
-		// 					response.status +
-		// 					":" +
-		// 					response.statusText
-		// 			);
-		// 			return null;
-		// 		}
-		// 	})
-		// 	.then((data) => {
-		// 		alert("Succeeded!\nName: " + name + "\nEmail: " + email);
-		// 	});
+		return fetch(
+			"https://say-yes-buffalo-backend.onrender.com/interaction",
+			{
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					email: email,
+					name: name,
+					jobId: "1",
+				}),
+			}
+		)
+			.then((response) => {
+				console.log(response);
+				if (response.ok) {
+					console.log("post response ok");
+				} else {
+					console.log(
+						"HTTP error:" +
+							response.status +
+							":" +
+							response.statusText
+					);
+					return null;
+				}
+			})
+			.then(() => {
+				console.log("Succeeded!\nName: " + name + "\nEmail: " + email);
+			});
 	};
 
 	const redirect = () => {
 		console.log("redirecting");
 		setRedirectLink("https://sayyesbuffalo.org/");
-		// window.location.replace(redirectLink);
+		window.location.replace(redirectLink);
 	};
 
 	return (
