@@ -142,25 +142,34 @@ function App() {
 						<div
 							style={{
 								display: "flex",
-								flexDirection: "column",
-								alignItems: "center",
+								flexDirection: "row",
+								width: "30%",
+								margin: "auto",
+								justifyContent: "space-between",
+								alignItems: "middle",
 								padding: "1rem",
 							}}
 						>
 							<h2>
-								<label htmlFor="name">
+								<label
+									htmlFor="name"
+									className="bg-blue-500 p-3 rounded-lg text-white text-xs"
+								>
 									Job Title: {jobTitle}
 								</label>
 							</h2>
 
 							<h3>
-								<label htmlFor="company">
+								<label
+									htmlFor="company"
+									className="bg-blue-500 p-3 rounded-lg text-white text-xs"
+								>
 									Job Description: {jobDescription}
 								</label>
 							</h3>
 						</div>
 						{/* Name */}
-						<div className="field w-full m-auto">
+						<div className="field w-full m-auto mt-3">
 							<input
 								className="w-full rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-slate-400"
 								id="first-name"
@@ -205,7 +214,6 @@ function App() {
 					</div>
 				</>
 			)}
-			<hr />
 		</div>
 	);
 }
