@@ -46,8 +46,7 @@ const job = {
 			})
 	},
 	createByName: (req, res) => {
-		const { companyName } = req.params
-		const { title, description, jobUrl } = req.body
+		const { title, description, jobUrl, companyName } = req.body
 		const prisma = require("../models/prisma")
 
 		prisma.company
