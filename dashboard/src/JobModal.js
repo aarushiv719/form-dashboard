@@ -22,7 +22,7 @@ export default function JobModal({ setShowModal }) {
 				<div class="animate-spin rounded-full h-8 w-8 border-b-4 border-white"></div>
 			</div>
 		);
-		setCustomLink("https://say-yes-buffalo-posting.onrender.com/?jobid=1");
+		setCustomLink("https://say-yes-buffalo-posting.onrender.com/?jobid=3");
 		setTimeout(() => {
 			setLinkReady(true);
 		}, 1000);
