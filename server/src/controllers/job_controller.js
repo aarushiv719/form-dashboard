@@ -1,7 +1,7 @@
 const job = {
 	get: (req, res) => {
-		const prisma = require("../models/prisma")
-		const { jobId } = req.params
+		const prisma = require("../models/prisma");
+		const { jobId } = req.params;
 
 		prisma.job
 			.findUnique({
@@ -11,7 +11,7 @@ const job = {
 			})
 			.then((job) => {
 				if (!job) {
-					res.send("Job doesn't exist")
+					res.send("Job doesn't exist");
 				} else {
 					prisma.company
 						.findUnique({
@@ -20,17 +20,17 @@ const job = {
 							},
 						})
 						.then((company) => {
-							job.company = company
-							res.send(JSON.stringify(job))
-						})
+							job.company = company;
+							res.send(JSON.stringify(job));
+						});
 				}
-				job
-			})
+				job;
+			});
 	},
 	create: (req, res) => {
-		const { companyId } = req.params
-		const { title, description, jobUrl } = req.body
-		const prisma = require("../models/prisma")
+		const { companyId } = req.params;
+		const { title, description, jobUrl } = req.body;
+		const prisma = require("../models/prisma");
 
 		prisma.job
 			.create({
@@ -42,8 +42,8 @@ const job = {
 				},
 			})
 			.then((job) => {
-				res.send(JSON.stringify(job))
-			})
+				res.send(JSON.stringify(job));
+			});
 	},
-}
-module.exports = job
+};
+module.exports = job;
