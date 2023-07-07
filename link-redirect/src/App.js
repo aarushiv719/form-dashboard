@@ -6,7 +6,6 @@ import Logo from "./media/sayyes.jpg";
 function App() {
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
-	const [redirectLink, setRedirectLink] = useState("");
 	const [isDefault, setIsDefault] = useState(false);
 	const [jobTitle, setJobTitle] = useState("");
 	const [company, setCompany] = useState("");
@@ -40,7 +39,7 @@ function App() {
 		}
 	}, []);
 	const formRef = useRef(null);
-	console.log(jobLink);
+	// console.log(jobLink);
 	const submit = () => {
 		let emailPush = sendEmail();
 		let serverPost = postInteraction();
@@ -121,8 +120,8 @@ function App() {
 
 	const redirect = () => {
 		console.log("redirecting");
-		setRedirectLink(jobLink);
-		window.location = redirectLink;
+		console.log();
+		window.location = jobLink;
 	};
 
 	return (
@@ -197,7 +196,7 @@ function App() {
 							disabled={email === "" || name === ""}
 							onClick={submit}
 						>
-							<a href={jobLink}>Continue to Link</a>
+							Continue to Job
 						</button>
 					</div>
 				</>
