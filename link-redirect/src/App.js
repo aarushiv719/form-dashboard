@@ -6,36 +6,17 @@ import Logo from "./media/sayyes.jpg";
 function App() {
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
+	const [redirectLink, setRedirectLink] = useState("");
 
 	const formRef = useRef(null);
 
 	const submit = () => {
-		sendEmail();
-		fetch("https://say-yes-buffalo-backend.onrender.com/interaction", {
-			method: "POST",
-			email: email,
-			name: name,
-			jobId: "1",
-		})
-			.then((response) => {
-				if (response.ok) {
-					return response.json();
-				} else {
-					console.log(
-						"HTTP error:" +
-							response.status +
-							":" +
-							response.statusText
-					);
-					return null;
-				}
-			})
-			.then((data) => {
-				alert("Succeeded!\nName: " + name + "\nEmail: " + email);
-			});
+		let emailPush = sendEmail();
+		let serverPost = postInteraction();
+		Promise.all([emailPush, serverPost]).then(() => {
+			redirect();
+		});
 	};
-
-	const getEmail = ({ id }) => {};
 
 	const sendEmail = () => {
 		const emailData = {
@@ -44,7 +25,6 @@ function App() {
 
 		const formData = Object.fromEntries(new FormData(formRef.current));
 		Object.assign(emailData, formData);
-		console.log(process.env.REACT_APP_SERVICE_ID);
 
 		let keys = {
 			service_id: "service_2oogo1g",
@@ -59,16 +39,57 @@ function App() {
 			company: "TEMP COMPANY",
 		};
 
-		emailjs
+		return emailjs
 			.send(keys.service_id, keys.template_id, params, keys.public_key)
 			.then(
 				(result) => {
+					console.log("Complete!");
 					formRef.current.reset();
+					return result;
 				},
 				(error) => {
 					alert("An error occurred, Please try again", error.text);
 				}
 			);
+	};
+
+	const postInteraction = () => {
+		console.log("posting");
+
+		return Promise.resolve(true);
+		// return fetch(
+		// 	"https://say-yes-buffalo-backend.onrender.com/interaction",
+		// 	{
+		// 		method: "POST",
+		// 		email: email,
+		// 		name: name,
+		// 		jobId: "1",
+		// 	}
+		// )
+		// 	.then((response) => {
+		// 		console.log(response);
+		// 		if (response.ok) {
+		// 			console.log("OK!");
+		// 			return response.json();
+		// 		} else {
+		// 			console.log(
+		// 				"HTTP error:" +
+		// 					response.status +
+		// 					":" +
+		// 					response.statusText
+		// 			);
+		// 			return null;
+		// 		}
+		// 	})
+		// 	.then((data) => {
+		// 		alert("Succeeded!\nName: " + name + "\nEmail: " + email);
+		// 	});
+	};
+
+	const redirect = () => {
+		console.log("redirecting");
+		setRedirectLink("https://sayyesbuffalo.org/");
+		// window.location.replace(redirectLink);
 	};
 
 	return (
