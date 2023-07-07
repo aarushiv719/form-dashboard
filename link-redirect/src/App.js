@@ -143,9 +143,9 @@ function App() {
 							style={{
 								display: "flex",
 								flexDirection: "row",
-								width: "30%",
+								width: "100%",
 								margin: "auto",
-								justifyContent: "space-between",
+								justifyContent: "space-evenly",
 								alignItems: "middle",
 								padding: "1rem",
 							}}
